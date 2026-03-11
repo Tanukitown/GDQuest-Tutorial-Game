@@ -9,9 +9,25 @@ extends Node2D
 
 
 func _ready() -> void:
+	get_tree().paused = false  
 	var viewport_size = get_viewport_rect().size
 	spawn_radius = viewport_size.length() * 0.8  # just outside screen diagonal
 	despawn_radius = spawn_radius + 300.0
+	
+	# Fill initial viewport with trees
+	var player_pos = $Player.global_position
+	for i in max_trees:
+		var angle = randf() * TAU
+		var distance = randf_range(150.0, spawn_radius)
+		var spawn_pos = player_pos + Vector2(cos(angle), sin(angle)) * distance
+		
+		if is_position_clear(spawn_pos):
+			var tree = tree_scene.instantiate()
+			tree.global_position = spawn_pos
+			add_child(tree)
+			spawned_trees.append(tree)
+
+	# Spawn initial slimes
 	spawn_mob()
 	spawn_mob()
 	spawn_mob()
@@ -72,3 +88,8 @@ func _on_timer_timeout() -> void:
 func _on_player_health_depleted() -> void:
 	%GameOver.visible = true
 	get_tree().paused = true
+
+
+func _on_button_pressed() -> void:
+	get_tree().paused = false
+	get_tree().call_deferred("reload_current_scene")

@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://c1bfau31nfqio" path="res://survivors_game.gd" id="1_qqaft"]
 [ext_resource type="Shader" uid="uid://gwyl7phscoyg" path="res://background.gdshader" id="2_7jj1j"]
 [ext_resource type="Texture2D" uid="uid://d1f1ntx56xstp" path="res://textures/istockphoto-865924416-612x612.jpg" id="2_qqaft"]
-[ext_resource type="PackedScene" uid="uid://dq3r015sr1uql" path="res://pine_tree.tscn" id="2_y3pti"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_edxvn"]
 shader = ExtResource("2_7jj1j")
@@ -48,39 +47,13 @@ unique_name_in_owner = true
 position = Vector2(-121, -150)
 rotation = -0.0013562378
 
-[node name="PineTree" parent="." unique_id=1960764671 instance=ExtResource("2_y3pti")]
-position = Vector2(547, 756)
-
-[node name="PineTree2" parent="." unique_id=115480464 instance=ExtResource("2_y3pti")]
-position = Vector2(417, 216)
-
-[node name="PineTree3" parent="." unique_id=2143949789 instance=ExtResource("2_y3pti")]
-position = Vector2(1340, 236)
-
-[node name="PineTree4" parent="." unique_id=240804218 instance=ExtResource("2_y3pti")]
-position = Vector2(1432, 269)
-
-[node name="PineTree5" parent="." unique_id=589640757 instance=ExtResource("2_y3pti")]
-position = Vector2(1278, 281)
-
-[node name="PineTree6" parent="." unique_id=1568838824 instance=ExtResource("2_y3pti")]
-position = Vector2(1403, 762)
-
-[node name="PineTree7" parent="." unique_id=1134761239 instance=ExtResource("2_y3pti")]
-position = Vector2(734, 146)
-
-[node name="PineTree8" parent="." unique_id=871850836 instance=ExtResource("2_y3pti")]
-position = Vector2(1190, 959)
-
-[node name="PineTree9" parent="." unique_id=221495031 instance=ExtResource("2_y3pti")]
-position = Vector2(1783, 464)
-
 [node name="Timer" type="Timer" parent="." unique_id=1584703191]
 wait_time = 0.3
 autostart = true
 
 [node name="GameOver" type="CanvasLayer" parent="." unique_id=1917378088]
 unique_name_in_owner = true
+process_mode = 3
 visible = false
 
 [node name="ColorRect" type="ColorRect" parent="GameOver" unique_id=402060085]
@@ -107,5 +80,23 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 156
 text = "Game Over"
 
+[node name="Button" type="Button" parent="GameOver/ColorRect/Label" unique_id=999419715]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -27.5
+offset_right = 60.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+action_mode = 0
+text = "Restart"
+
 [connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="GameOver/ColorRect/Label/Button" to="." method="_on_button_pressed"]
