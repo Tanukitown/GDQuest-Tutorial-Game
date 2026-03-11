@@ -21,3 +21,11 @@ func _physics_process(delta: float) -> void:
 		%ProgressBar.value = health
 		if health <= 0.0:
 			health_depleted.emit()
+
+@onready var background = %TextureRect
+
+func _process(_delta):
+	var shader_mat = background.material as ShaderMaterial
+	# Divide by texture size to normalize the offset
+	var tex_size = background.texture.get_size()
+	shader_mat.set_shader_parameter("offset", global_position / tex_size)

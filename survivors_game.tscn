@@ -2,7 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://c1sx7bic4uhdj" path="res://player.tscn" id="1_3cish"]
 [ext_resource type="Script" uid="uid://c1bfau31nfqio" path="res://survivors_game.gd" id="1_qqaft"]
+[ext_resource type="Shader" uid="uid://gwyl7phscoyg" path="res://background.gdshader" id="2_7jj1j"]
+[ext_resource type="Texture2D" uid="uid://d1f1ntx56xstp" path="res://textures/istockphoto-865924416-612x612.jpg" id="2_qqaft"]
 [ext_resource type="PackedScene" uid="uid://dq3r015sr1uql" path="res://pine_tree.tscn" id="2_y3pti"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_edxvn"]
+shader = ExtResource("2_7jj1j")
+shader_parameter/offset = Vector2(0, 0)
 
 [sub_resource type="Curve2D" id="Curve2D_7jj1j"]
 _data = {
@@ -17,13 +23,20 @@ script = ExtResource("1_qqaft")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1637442154]
 layer = -1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=987217697]
-offset_left = -6.0
-offset_top = -12.0
-offset_right = 1936.0
-offset_bottom = 1109.0
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1363971061]
+unique_name_in_owner = true
+texture_repeat = 2
+material = SubResource("ShaderMaterial_edxvn")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qqaft")
+stretch_mode = 1
 
 [node name="Player" parent="." unique_id=1909071804 instance=ExtResource("1_3cish")]
+unique_name_in_owner = true
 position = Vector2(951, 546)
 
 [node name="Path2D" type="Path2D" parent="Player" unique_id=989155323]
